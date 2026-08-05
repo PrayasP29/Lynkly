@@ -1,13 +1,18 @@
 import {generateID} from "../utils/helper.js";
 import urlSchema from "../models/shorturl.model.js";
+import { saveShortUrlService } from "../dao/shorturl.js";
 
-export const createShortUrlService = async(url) => { 
+export const createShortUrlServiceWithoutUserId = async(url) => { 
     const ShortUrl = await generateID(6)
-    const newUrl = new urlSchema({
-        full_url: url,
-        short_url: ShortUrl,
-        clicks: 0,
-    })
-    newUrl.save()
+    if(!ShortUrl){
+        throw new Error("Failed to generate short URL");
+    }
+    await saveShortUrlService(url, ShortUrl)
+    return ShortUrl
+}
+
+export const createShortUrlServiceWithUserId = async(url, userId) => { 
+    const ShortUrl = await generateID(6)
+    await saveShortUrlService(url, ShortUrl,userId)
     return ShortUrl
 }
