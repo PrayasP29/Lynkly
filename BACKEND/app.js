@@ -2,26 +2,16 @@ import express from "express";
 import {nanoid} from "nanoid";
 import dotenv from "dotenv";
 dotenv.config("./.env");
+import shorturlRoutes from "./src/routes/shorturl.routes.js";
 import urlSchema from "./src/models/shorturl.model.js";
 import filecabinet from "./src/config/mongo.config.js";
 const app=express();
 
-
+app.use(shorturlRoutes);
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
-app.post("/api/create",(req,res)=>{
-    console.log("Body:", req.body);
-    const {url}= req.body;
-    const ShortUrl = nanoid(7);
-    const newUrl = new urlSchema({
-        full_url: url,
-        short_url: ShortUrl,
-        clicks: 0,
-    })
-    newUrl.save()
-    res.send(ShortUrl)
-})
+app.use("/api/create",shorturlRoutes);
 
 app.get("/:id",async(req,res)=>{
     const {id}= req.params;
