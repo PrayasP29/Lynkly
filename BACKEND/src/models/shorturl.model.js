@@ -1,6 +1,6 @@
-import moongoose from "mongoose";
+import mongoose from "mongoose";
 
-const shortUrlSchema = new moongoose.Schema({
+const shortUrlSchema = new mongoose.Schema({
     full_url: {
         type: String,
         required: true,
@@ -17,12 +17,12 @@ const shortUrlSchema = new moongoose.Schema({
         default: 0,
     },
     user_id: {
-        type: moongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",        
         //required: true,
     },
 });
 
-const ShortUrl = moongoose.model("ShortUrl", shortUrlSchema);
+const ShortUrl = mongoose.model("ShortUrl", shortUrlSchema);
 
 export default ShortUrl;
