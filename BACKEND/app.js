@@ -6,6 +6,7 @@ import shorturlRoutes from "./src/routes/shorturl.routes.js";
 import filecabinet from "./src/config/mongo.config.js";
 import {redirectToFullUrl} from "./src/controller/shorturl.controller.js";
 import { errorHandler, notFoundHandler } from "./src/utils/errorHandler.js";
+import auth_routes from "./src/routes/auth.routes.js";
 const app=express();
 
 app.use(express.json());
@@ -22,9 +23,8 @@ app.use((req, res, next) => {
     console.log("REQUEST:", req.method, req.originalUrl);
     next();
 });
-//app.use(shorturlRoutes);
+app.use("/api/auth",auth_routes)
 app.use("/api/create", shorturlRoutes);
-
 app.get("/:id",redirectToFullUrl);
 
 app.use(notFoundHandler);
