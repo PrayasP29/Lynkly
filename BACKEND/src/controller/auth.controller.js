@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { findUserByEmail, createUser } from "../dao/user.dao.js";
-import { CookiesOptions } from "../config/config.js";
+import { CookiesOptions, RefreshTokenCookieOptions } from "../config/config.js";
 
 
 const generateToken = (user) => {
@@ -13,6 +13,20 @@ const generateToken = (user) => {
         process.env.JWT_SECRET,
         {
             expiresIn: "7d"
+        }
+    );
+};
+
+
+const generateRefreshToken = (user) => {
+    return jwt.sign(
+        {
+            id: user._id,
+            email: user.email
+        },
+        process.env.JWT_REFRESH_SECRET,
+        {
+            expiresIn: "30d"
         }
     );
 };
@@ -55,6 +69,12 @@ export const registerUser = async (req, res) => {
             "token",
             token,
             CookiesOptions
+        );
+
+        res.cookie(
+            "refreshToken",
+            generateRefreshToken(newUser),
+            RefreshTokenCookieOptions
         );
 
 
@@ -121,6 +141,12 @@ export const loginUser = async (req, res) => {
             CookiesOptions
         );
 
+        res.cookie(
+            "refreshToken",
+            generateRefreshToken(user),
+            RefreshTokenCookieOptions
+        );
+
 
         return res.status(200).json({
             message: "Login successful",
@@ -129,6 +155,30 @@ export const loginUser = async (req, res) => {
                 name: user.name,
                 email: user.email
             }
+        });
+
+
+    } catch (error) {
+
+        return res.status(500).json({
+            message: error.message
+        });
+
+    }
+};
+
+
+
+export const logoutUser = async (req, res) => {
+    try {
+
+        // Clear authentication cookies
+        res.clearCookie("token", CookiesOptions);
+        res.clearCookie("refreshToken", RefreshTokenCookieOptions);
+
+
+        return res.status(200).json({
+            message: "User logged out successfully"
         });
 
 

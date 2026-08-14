@@ -1,8 +1,10 @@
 import AppError from "../errors/AppError.js";
-import { createShortUrlServiceWithoutUserId } from "../services/shorturl.services.js"
+import { createShortUrlServiceWithoutUserId, createCustomShortUrlServiceWithUserId } from "../services/shorturl.services.js"
 import urlSchema from "../models/shorturl.model.js";
 
-export const createShortUrl = async (req, res) => {
+export const createShortUrl = async (req, res, next) => {
+    if (req.body.customShortUrl) return next();
+
     const { url } = req.body;
 
     if (!url || typeof url !== 'string') {
@@ -40,4 +42,13 @@ export const redirectToFullUrl = async (req, res) => {
     urlRecord.clicks++;
     await urlRecord.save();
     return res.redirect(urlRecord.full_url);
+}
+
+export const createCustomShortUrl = async (req, res) => {
+    const { url, customShortUrl } = req.body;
+    const shortUrl = await createCustomShortUrlServiceWithUserId(url, customShortUrl, req.user.id);
+    res.status(201).json({
+        success: true,
+        shortUrl: `${process.env.APP_URL}/${shortUrl}`,
+    });
 }

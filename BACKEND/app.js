@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
 import shorturlRoutes from "./src/routes/shorturl.routes.js";
@@ -11,6 +12,7 @@ const app=express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
+app.use(cookieParser());
 
 // Enable CORS for frontend (adjust origins as needed)
 app.use(cors({

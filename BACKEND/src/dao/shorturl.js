@@ -21,3 +21,7 @@ export const saveShortUrl = async(url, shortUrl, userId = null) => {
     const newUrl = new urlSchema(urlData);
     await newUrl.save();
 }
+
+export const findShortUrlBySlug = async (shortUrl) => {
+    return await urlSchema.findOne({ short_url: shortUrl });
+}
