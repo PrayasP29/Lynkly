@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { findUserByEmail, createUser } from "../dao/user.dao.js";
+import { findUserByEmail, createUser, findUserById } from "../dao/user.dao.js";
 import { CookiesOptions, RefreshTokenCookieOptions } from "../config/config.js";
 
 
