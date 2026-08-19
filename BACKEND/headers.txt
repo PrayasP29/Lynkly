@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Set-Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhODAzMjZhY2UyZDE2YmI5NjFiYjFkZCIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc4NzEzMjM0OSwiZXhwIjoxNzg3NzM3MTQ5fQ.ScCckhZZkj50TXnuhBVdZctdNa8xWwchU6O2_gW3zrk; Max-Age=604800; Path=/; Expires=Wed, 26 Aug 2026 09:39:09 GMT; HttpOnly; SameSite=Lax
+Set-Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhODAzMjZhY2UyZDE2YmI5NjFiYjFkZCIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc4NzEzMjM0OSwiZXhwIjoxNzg5NzI0MzQ5fQ._yGRzov8NwUXE54xV6_03gpjMTdwIPOAcV4ZxlJsgsY; Max-Age=2592000; Path=/; Expires=Fri, 18 Sep 2026 09:39:09 GMT; HttpOnly; SameSite=Lax
+Content-Type: application/json; charset=utf-8
+Content-Length: 117
+ETag: W/"75-enbDdFSflFP90XJO+IbR+eX8+/Q"
+Date: Wed, 19 Aug 2026 09:39:09 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
