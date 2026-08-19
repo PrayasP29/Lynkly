@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Input } from '../../common/Input/Input'
 import { Button } from '../../common/Button/Button'
 import { Loader } from '../../common/Loader/Loader'
+import { useAuth } from '../../../context/AuthContext'
+import { ROUTES } from '../../../constants/routes'
 
 export const LoginForm = () => {
+  const { login } = useAuth()
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -20,11 +25,10 @@ export const LoginForm = () => {
 
     setIsPending(true)
     try {
-      // TODO: Wire up to backend login endpoint once auth is implemented
-      console.log('Login attempt:', { email, password })
-      // await loginMutation.mutateAsync({ email, password })
+      await login({ email, password })
+      navigate(ROUTES.PORTAL)
     } catch (err) {
-      setError(err.message || 'Login failed')
+      setError(err.response?.data?.message || 'Login failed')
     } finally {
       setIsPending(false)
     }

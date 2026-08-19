@@ -1,7 +1,7 @@
 import axiosInstance from './axiosInstance'
 
-export const createShortUrl = async (url) => {
-  const response = await axiosInstance.post('/api/create', { url })
+export const createShortUrl = async (data) => {
+  const response = await axiosInstance.post('/api/create', data)
   return response.data
 }
 

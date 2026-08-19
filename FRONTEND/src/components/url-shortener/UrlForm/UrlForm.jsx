@@ -4,8 +4,9 @@ import { Button } from '../../common/Button/Button'
 import { Loader } from '../../common/Loader/Loader'
 import { isValidUrl, ensureUrlProtocol } from '../../../utils/validators'
 
-export const UrlForm = ({ onSuccess }) => {
+export const UrlForm = ({ onSuccess, showCustomInput = false }) => {
   const [url, setUrl] = useState('')
+  const [customShortUrl, setCustomShortUrl] = useState('')
   const [error, setError] = useState('')
   const [isPending, setIsPending] = useState(false)
 
@@ -27,8 +28,9 @@ export const UrlForm = ({ onSuccess }) => {
 
     setIsPending(true)
     try {
-      await onSuccess(urlWithProtocol)
+      await onSuccess({ url: urlWithProtocol, customShortUrl: showCustomInput ? customShortUrl : undefined })
       setUrl('')
+      setCustomShortUrl('')
     } catch (err) {
       setError(err.message || 'Failed to create short URL')
     } finally {
@@ -48,6 +50,19 @@ export const UrlForm = ({ onSuccess }) => {
         errorMessage={error}
         label="URL to Shorten"
       />
+      {showCustomInput && (
+        <div className="flex gap-2">
+          <Input
+            placeholder="Custom short URL (optional)"
+            value={customShortUrl}
+            onChange={(e) => setCustomShortUrl(e.target.value)}
+            disabled={isPending}
+            error={!!error}
+            errorMessage={error}
+            label="Custom alias"
+          />
+        </div>
+      )}
       <div className="flex gap-2">
         <Button
           type="submit"

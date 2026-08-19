@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Input } from '../../common/Input/Input'
 import { Button } from '../../common/Button/Button'
 import { Loader } from '../../common/Loader/Loader'
+import { useAuth } from '../../../context/AuthContext'
+import { ROUTES } from '../../../constants/routes'
 
 export const SignupForm = () => {
+  const { register } = useAuth()
+  const navigate = useNavigate()
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -14,7 +20,7 @@ export const SignupForm = () => {
     e.preventDefault()
     setError('')
 
-    if (!email || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword) {
       setError('Please fill in all fields')
       return
     }
@@ -31,11 +37,10 @@ export const SignupForm = () => {
 
     setIsPending(true)
     try {
-      // TODO: Wire up to backend signup endpoint once auth is implemented
-      console.log('Signup attempt:', { email, password })
-      // await signupMutation.mutateAsync({ email, password })
+      await register({ name, email, password })
+      navigate(ROUTES.LOGIN)
     } catch (err) {
-      setError(err.message || 'Signup failed')
+      setError(err.response?.data?.message || 'Signup failed')
     } finally {
       setIsPending(false)
     }
@@ -43,6 +48,15 @@ export const SignupForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-sm">
+      <Input
+        type="text"
+        placeholder="Your name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        disabled={isPending}
+        error={!!error}
+        label="Name"
+      />
       <Input
         type="email"
         placeholder="your@email.com"
