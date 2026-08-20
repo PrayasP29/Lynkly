@@ -172,6 +172,10 @@ export const loginUser = async (req, res) => {
 export const getCurrentUser = async (req, res) => {
     try {
 
+        if (!req.user) {
+            return res.status(401).json({ message: "Not authenticated" });
+        }
+
         const user = await findUserById(req.user.id);
 
         if (!user) {
