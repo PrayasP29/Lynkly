@@ -30,6 +30,11 @@ Thumbs.db
 
 # Project specific
 backend.md
+cookies.txt
+body.json
+headers.txt
+login.json
+response.json
 
 # Production
 *.production*
