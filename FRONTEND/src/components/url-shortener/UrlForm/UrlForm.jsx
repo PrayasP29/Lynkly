@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Input } from '../../common/Input/Input'
 import { Button } from '../../common/Button/Button'
-import { Loader } from '../../common/Loader/Loader'
+import { Loader2 } from 'lucide-react'
 import { isValidUrl, ensureUrlProtocol } from '../../../utils/validators'
+import { ErrorCard } from '../../common/ErrorCard/ErrorCard'
 
 export const UrlForm = ({ onSuccess, showCustomInput = false }) => {
   const [url, setUrl] = useState('')
@@ -39,41 +40,39 @@ export const UrlForm = ({ onSuccess, showCustomInput = false }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {error && (
+        <ErrorCard message={error} onClose={() => setError('')} />
+      )}
       <Input
         type="url"
         placeholder="Enter your long URL (e.g., https://example.com)"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
         disabled={isPending}
-        error={!!error}
-        errorMessage={error}
+        error={!!error && error.includes('URL')}
+        errorMessage={error.includes('URL') ? error : ''}
         label="URL to Shorten"
       />
       {showCustomInput && (
-        <div className="flex gap-2">
-          <Input
-            placeholder="Custom short URL (optional)"
-            value={customShortUrl}
-            onChange={(e) => setCustomShortUrl(e.target.value)}
-            disabled={isPending}
-            error={!!error}
-            errorMessage={error}
-            label="Custom alias"
-          />
-        </div>
+        <Input
+          placeholder="Custom short URL (optional)"
+          value={customShortUrl}
+          onChange={(e) => setCustomShortUrl(e.target.value)}
+          disabled={isPending}
+          error={!!error && error.includes('alias')}
+          errorMessage={error.includes('alias') ? error : ''}
+          label="Custom alias"
+        />
       )}
       <div className="flex gap-2">
         <Button
           type="submit"
           disabled={isPending}
-          className="flex-1 flex items-center justify-center gap-2"
+          className="flex-1 flex items-center justify-center min-h-[46px]"
         >
           {isPending ? (
-            <>
-              <Loader size="sm" />
-              <span>Shortening...</span>
-            </>
+            <Loader2 className="w-5 h-5 animate-spin text-white" />
           ) : (
             'Shorten URL'
           )}

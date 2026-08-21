@@ -9,13 +9,14 @@ export const Button = ({
   className = '',
   ...props
 }) => {
-  const baseStyles = 'px-4 py-2 rounded-lg font-semibold transition-colors duration-200'
-  
+  const baseStyles = 'rounded-lg px-4 py-2.5 font-semibold text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-brand-bg inline-flex items-center justify-center gap-2'
+
   const variants = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 disabled:bg-blue-400',
-    secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 disabled:bg-gray-100',
-    danger: 'bg-red-600 text-white hover:bg-red-700 disabled:bg-red-400',
-    success: 'bg-green-600 text-white hover:bg-green-700 disabled:bg-green-400',
+    primary: `${baseStyles} bg-brand-primary text-white hover:bg-brand-primary-hover active:scale-[0.98] focus:ring-brand-primary/50 shadow-md shadow-brand-primary/15`,
+    secondary: `${baseStyles} bg-brand-surface text-brand-text border border-brand-border hover:bg-brand-bg hover:text-brand-primary focus:ring-brand-primary/30`,
+    ghost: `${baseStyles} text-brand-text/85 hover:text-brand-primary hover:bg-brand-border/30 focus:ring-brand-primary/20`,
+    danger: `${baseStyles} bg-red-500 text-white hover:bg-red-600 active:scale-[0.98] focus:ring-red-500/50`,
+    success: `${baseStyles} bg-emerald-500 text-white hover:bg-emerald-600 active:scale-[0.98] focus:ring-emerald-500/50`,
   }
 
   return (
@@ -23,7 +24,7 @@ export const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${baseStyles} ${variants[variant]} ${disabled ? 'cursor-not-allowed' : ''} ${className}`}
+      className={`${variants[variant]} ${disabled ? 'cursor-not-allowed opacity-60' : ''} ${className}`}
       {...props}
     >
       {children}

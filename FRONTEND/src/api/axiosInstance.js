@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'
+const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
 
 const axiosInstance = axios.create({
   baseURL,
@@ -17,6 +17,7 @@ axiosInstance.interceptors.response.use(
       error.response?.status === 401 &&
       !error.config?.url?.includes('/api/auth/login') &&
       !error.config?.url?.includes('/api/create') &&
+      !error.config?.url?.includes('/api/auth/me') &&
       !window.location.pathname.startsWith('/login')
     ) {
       window.location.assign('/login')

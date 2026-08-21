@@ -1,21 +1,25 @@
 import React from 'react'
 import { CopyButton } from '../CopyButton/CopyButton'
 import { truncateUrl } from '../../../utils/formatUrl'
+import { Link2 } from 'lucide-react'
 
 export const UrlHistoryItem = ({ item }) => {
   const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'
   const fullShortUrl = `${baseUrl}/${item.shortUrl}`
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-between gap-4 hover:shadow-md transition-shadow">
+    <div className="bg-brand-surface border border-brand-border/50 rounded-xl p-4 flex items-center justify-between gap-4 hover:shadow-md transition-all duration-300">
       <div className="flex-1 min-w-0">
-        <p className="text-sm text-gray-600 mb-1">Original:</p>
-        <p className="text-sm text-gray-900 truncate">{truncateUrl(item.originalUrl, 60)}</p>
-        <p className="text-xs text-gray-500 mt-2">
-          Short: <span className="font-mono text-blue-600">{item.shortUrl}</span>
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-brand-text-muted/70 uppercase tracking-wider mb-1">
+          <Link2 className="w-3.5 h-3.5" />
+          <span>Original Link</span>
+        </div>
+        <p className="text-sm text-brand-text truncate font-medium">{truncateUrl(item.originalUrl, 60)}</p>
+        <p className="text-xs text-brand-primary mt-1.5 font-semibold">
+          Short alias: <span className="font-mono text-brand-text font-bold bg-brand-bg px-1.5 py-0.5 rounded border border-brand-border/20">{item.shortUrl}</span>
         </p>
       </div>
-      <CopyButton text={fullShortUrl} />
+      <CopyButton text={fullShortUrl} className="scale-90" />
     </div>
   )
 }
