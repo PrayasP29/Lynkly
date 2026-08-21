@@ -25,6 +25,7 @@ app.use((req, res, next) => {
     console.log("REQUEST:", req.method, req.originalUrl);
     next();
 });
+app.get("/health",(req,res)=>res.json({status:"ok"}));
 app.use("/api/auth",auth_routes)
 app.use("/api/create", shorturlRoutes);
 app.get("/:id",redirectToFullUrl);
