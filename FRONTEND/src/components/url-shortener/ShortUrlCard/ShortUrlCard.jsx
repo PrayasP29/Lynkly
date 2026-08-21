@@ -5,8 +5,7 @@ import { truncateUrl } from '../../../utils/formatUrl'
 import { CheckCircle2, Link2 } from 'lucide-react'
 
 export const ShortUrlCard = ({ originalUrl, shortUrl, onCopySuccess }) => {
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'
-  const fullShortUrl = `${baseUrl}/${shortUrl}`
+  const fullShortUrl = `${window.location.origin}/${shortUrl}`
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {

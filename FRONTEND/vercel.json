@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/((?!login|signup|portal|assets)[^/.]+)",
+      "destination": "https://lynkly-qzop.onrender.com/$1"
+    }
+  ]
+}
