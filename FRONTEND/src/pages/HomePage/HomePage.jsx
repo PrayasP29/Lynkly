@@ -49,12 +49,14 @@ export const HomePage = () => {
       {/* Hero & Form Cohesive Block */}
       <div className="flex flex-col items-center justify-center text-center space-y-8 bg-brand-surface border border-brand-border/60 rounded-xl p-6 sm:p-10 shadow-lg relative z-10 transition-all duration-300">
         <div className="space-y-4 max-w-2xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-brand-text leading-tight">
-            Shorten Your Links
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold italic tracking-tight text-brand-text leading-tight">
+            Too Long? Lynk It.
           </h1>
           <p className="text-base sm:text-lg text-brand-text-muted max-w-xl mx-auto leading-relaxed">
-            Turn long, unwieldy URLs into short, shareable links in seconds. 
-            {user ? ' Enter a custom alias below for personalization.' : ' Sign in to use custom aliases.'}
+            One click. One short link. Zero clutter.
+          </p>
+          <p className="text-xs sm:text-sm text-brand-text-muted opacity-70 max-w-xl mx-auto">
+            Sign up or log in to unlock custom aliases.
           </p>
         </div>
 

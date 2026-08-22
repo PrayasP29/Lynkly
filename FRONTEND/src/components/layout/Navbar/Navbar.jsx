@@ -5,6 +5,7 @@ import { useAuth } from '../../../context/AuthContext'
 import { useTheme } from '../../../context/ThemeContext'
 import { useSelector } from 'react-redux'
 import { Sun, Moon, Menu, X, Link2, LogOut } from 'lucide-react'
+import logo from '../../../assets/logo.png'
 
 export const Navbar = () => {
   const { isAuthenticated: authIsAuthenticated, logout: authLogout, user } = useAuth()
@@ -39,7 +40,7 @@ export const Navbar = () => {
           {/* Left: Logo */}
           <div className="flex items-center">
             <Link to={ROUTES.HOME} className="flex items-center gap-2 text-brand-text hover:text-brand-primary transition-colors text-2xl font-bold tracking-tight">
-              <Link2 className="w-6 h-6 text-brand-primary animate-pulse" />
+              <img src={logo} alt="Lynkly Logo" className="w-8 h-8 object-contain" />
               <span>Lynkly</span>
             </Link>
           </div>
