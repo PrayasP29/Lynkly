@@ -94,7 +94,7 @@ export const registerUser = async (req, res) => {
     } catch (error) {
 
         return res.status(500).json({
-            message: error.message
+            message: "Something went wrong. Please try again."
         });
 
     }
@@ -168,7 +168,7 @@ export const loginUser = async (req, res) => {
     } catch (error) {
 
         return res.status(500).json({
-            message: error.message
+            message: "Something went wrong. Please try again."
         });
 
     }
@@ -203,7 +203,7 @@ export const getCurrentUser = async (req, res) => {
     } catch (error) {
 
         return res.status(500).json({
-            message: error.message
+            message: "Something went wrong. Please try again."
         });
 
     }
@@ -227,7 +227,7 @@ export const logoutUser = async (req, res) => {
     } catch (error) {
 
         return res.status(500).json({
-            message: error.message
+            message: "Something went wrong. Please try again."
         });
 
     }

@@ -20,7 +20,7 @@ const sendErrorProd = (err, res) => {
 	console.error("Unexpected error:", err);
 	return res.status(500).json({
 		status: "error",
-		message: err.message || "Internal Server Error",
+		message: "Internal Server Error",
 	});
 };
 
