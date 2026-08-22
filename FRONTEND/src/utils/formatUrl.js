@@ -6,3 +6,6 @@ export const truncateUrl = (url, maxLength = 50) => {
 export const getShortUrlDisplay = (baseUrl, shortId) => {
   return `${baseUrl}/${shortId}`
 }
+
+// presentation/copy only — canonical href must keep the protocol
+export const stripProtocol = (url) => url.replace(/^https?:\/\//, '')

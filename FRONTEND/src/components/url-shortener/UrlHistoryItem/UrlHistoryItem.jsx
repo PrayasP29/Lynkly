@@ -1,6 +1,6 @@
 import React from 'react'
 import { CopyButton } from '../CopyButton/CopyButton'
-import { truncateUrl } from '../../../utils/formatUrl'
+import { truncateUrl, stripProtocol } from '../../../utils/formatUrl'
 import { Link2 } from 'lucide-react'
 
 export const UrlHistoryItem = ({ item }) => {
@@ -18,7 +18,7 @@ export const UrlHistoryItem = ({ item }) => {
           Short alias: <span className="font-mono text-brand-text font-bold bg-brand-bg px-1.5 py-0.5 rounded border border-brand-border/20">{item.shortUrl}</span>
         </p>
       </div>
-      <CopyButton text={fullShortUrl} className="scale-90" />
+      <CopyButton text={stripProtocol(fullShortUrl)} className="scale-90" />
     </div>
   )
 }

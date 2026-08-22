@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { CopyButton } from '../CopyButton/CopyButton'
-import { truncateUrl } from '../../../utils/formatUrl'
+import { truncateUrl, stripProtocol } from '../../../utils/formatUrl'
 import { CheckCircle2, Link2 } from 'lucide-react'
 
 export const ShortUrlCard = ({ originalUrl, fullShortUrl, onCopySuccess }) => {
@@ -41,10 +41,10 @@ export const ShortUrlCard = ({ originalUrl, fullShortUrl, onCopySuccess }) => {
           <div className="flex gap-2 items-stretch">
             <div className="flex-1 flex items-center gap-2 bg-brand-bg/50 px-3 py-2 rounded-lg border border-brand-border/40 font-mono text-sm text-brand-primary font-semibold truncate select-all">
               <Link2 className="w-4 h-4 text-brand-text-muted/50 flex-shrink-0" />
-              <a href={fullShortUrl} target="_blank" rel="noopener noreferrer" className="truncate hover:underline">{fullShortUrl}</a>
+              <a href={fullShortUrl} target="_blank" rel="noopener noreferrer" className="truncate hover:underline">{stripProtocol(fullShortUrl)}</a>
             </div>
             <CopyButton
-              text={fullShortUrl}
+              text={stripProtocol(fullShortUrl)}
               onSuccess={handleCopy}
               copied={copied}
             />
