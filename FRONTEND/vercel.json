@@ -7,6 +7,10 @@
     {
       "source": "/((?!login|signup|portal|assets|api)[^/.]+)",
       "destination": "https://lynkly-qzop.onrender.com/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

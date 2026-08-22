@@ -27,6 +27,7 @@ export const HomePage = () => {
         const historyItem = {
           originalUrl,
           shortUrl: shortId,
+          fullUrl: result.shortUrl,
           createdAt: new Date().toISOString(),
         }
         
@@ -69,7 +70,7 @@ export const HomePage = () => {
           <div className="w-full">
             <ShortUrlCard
               originalUrl={lastResult.originalUrl}
-              shortUrl={lastResult.shortUrl}
+              fullShortUrl={lastResult.fullUrl}
               onCopySuccess={() =>
                 setToast({ type: 'success', message: 'Link copied to clipboard!' })
               }

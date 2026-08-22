@@ -4,8 +4,7 @@ import { CopyButton } from '../CopyButton/CopyButton'
 import { truncateUrl } from '../../../utils/formatUrl'
 import { CheckCircle2, Link2 } from 'lucide-react'
 
-export const ShortUrlCard = ({ originalUrl, shortUrl, onCopySuccess }) => {
-  const fullShortUrl = `${window.location.origin}/${shortUrl}`
+export const ShortUrlCard = ({ originalUrl, fullShortUrl, onCopySuccess }) => {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {

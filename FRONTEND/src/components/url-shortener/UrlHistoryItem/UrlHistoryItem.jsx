@@ -4,7 +4,7 @@ import { truncateUrl } from '../../../utils/formatUrl'
 import { Link2 } from 'lucide-react'
 
 export const UrlHistoryItem = ({ item }) => {
-  const fullShortUrl = `${window.location.origin}/${item.shortUrl}`
+  const fullShortUrl = item.fullUrl || `/${item.shortUrl}`
 
   return (
     <div className="bg-brand-surface border border-brand-border/50 rounded-xl p-4 flex items-center justify-between gap-4 hover:shadow-md transition-all duration-300">
