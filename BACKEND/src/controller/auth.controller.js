@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { findUserByEmail, createUser, findUserById } from "../dao/user.dao.js";
 import { CookiesOptions, RefreshTokenCookieOptions } from "../config/config.js";
+import { recordFailure, clearFailures } from "../utils/rateLimit.js";
 
 
 const generateToken = (user) => {
@@ -42,6 +43,7 @@ export const registerUser = async (req, res) => {
         const existingUser = await findUserByEmail(email);
 
         if (existingUser) {
+            recordFailure(req);
             return res.status(400).json({
                 message: "User already exists"
             });
@@ -88,6 +90,7 @@ export const registerUser = async (req, res) => {
         });
 
 
+
     } catch (error) {
 
         return res.status(500).json({
@@ -110,6 +113,7 @@ export const loginUser = async (req, res) => {
 
 
         if (!user) {
+            recordFailure(req);
             return res.status(404).json({
                 message: "User not found"
             });
@@ -124,10 +128,13 @@ export const loginUser = async (req, res) => {
 
 
         if (!isPasswordCorrect) {
+            recordFailure(req);
             return res.status(401).json({
                 message: "Invalid credentials"
             });
         }
+
+        clearFailures(req);
 
 
         // Generate JWT

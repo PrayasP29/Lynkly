@@ -10,6 +10,9 @@ import { errorHandler, notFoundHandler } from "./src/utils/errorHandler.js";
 import auth_routes from "./src/routes/auth.routes.js";
 const app=express();
 
+// ponytail: required behind Render's proxy so req.ip is the client, not the proxy
+app.set("trust proxy", 1);
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
