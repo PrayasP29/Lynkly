@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
+// ponytail: prod assumes same-origin /api proxy via vercel.json; host FE+BE apart without a proxy if that changes
+const baseURL = import.meta.env.DEV
+  ? import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
+  : ''
 
 const axiosInstance = axios.create({
   baseURL,

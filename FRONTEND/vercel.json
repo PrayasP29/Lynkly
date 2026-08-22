@@ -1,7 +1,11 @@
 {
   "rewrites": [
     {
-      "source": "/((?!login|signup|portal|assets)[^/.]+)",
+      "source": "/api/:path*",
+      "destination": "https://lynkly-qzop.onrender.com/api/:path*"
+    },
+    {
+      "source": "/((?!login|signup|portal|assets|api)[^/.]+)",
       "destination": "https://lynkly-qzop.onrender.com/$1"
     }
   ]
